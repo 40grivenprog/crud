@@ -1,0 +1,13 @@
+<%@articles.each do |article|%>
+<p>
+  <strong>Title:</strong>
+  <%= article.title %>
+</p>
+<p>
+  <strong>Desc:</strong>
+  <%= article.text %>
+</p>
+-------------------------
+<%end%>
+<br>
+<%= link_to 'New Article', new_article_path %>
