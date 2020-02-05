@@ -1,3 +1,4 @@
+All articles
 <%@articles.each do |article|%>
 <p>
   <strong>Title:</strong>
@@ -7,6 +8,12 @@
   <strong>Desc:</strong>
   <%= article.text %>
 </p>
+<%=link_to 'Show', article_path(article) %>
+<%=link_to 'Edit', edit_article_path(article) %>
+<%=link_to 'Destroy', article_path(article),
+			method: :delete,
+			data: { confirm: 'Are you sure?' } %>
+<br>
 -------------------------
 <%end%>
 <br>

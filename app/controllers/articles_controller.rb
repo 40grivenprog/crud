@@ -10,12 +10,20 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    
+    @article = Article.find(params[:id])
+  end
+
+  def update
+  @article = Article.find(params[:id])
+  if @article.update(article_params)
+    redirect_to @article
+  else
+    render 'edit'
+  end 
   end
 
   def create
     @article = Article.new(article_params)
-    binding.pry
     if @article.save
       redirect_to @article
     else
@@ -25,8 +33,14 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    #binding.pry
     @article = Article.find(params[:id])
+    @comments = @article.comments unless @article.comments.empty?
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    redirect_to articles_path
   end
 
   private
@@ -35,6 +49,7 @@ class ArticlesController < ApplicationController
   end
   
 end
+
 =begin
   <p>
     <%= form.label :title %><%=#@article.errors.messages[:title] if  @article.errors.messages[:title]%><br>
